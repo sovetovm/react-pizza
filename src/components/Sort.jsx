@@ -1,13 +1,19 @@
 import { useState } from 'react';
 
-export default function Sort() {
-  const list = ['популярности', 'цене', 'алфавиту'];
+export default function Sort({ value, onChangeSort }) {
+  const list = [
+    { name: 'убыванию популярности', sortProperty: 'rating' },
+    { name: 'возрастанию популярности', sortProperty: '-rating' },
+    { name: 'убыванию цены', sortProperty: 'price' },
+    { name: 'возрастанию цены', sortProperty: '-price' },
+    { name: 'алфавиту Я-А', sortProperty: 'title' },
+    { name: 'алфавиту А-Я', sortProperty: '-title' },
+  ];
 
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
 
   const onClickListItem = (index) => {
-    setSelected(index);
+    onChangeSort(index);
     setOpen(false);
   };
 
@@ -26,17 +32,17 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{list[selected]}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
           <ul>
-            {list.map((name, index) => (
+            {list.map((obj, index) => (
               <li
-                key={name}
-                onClick={() => onClickListItem(index)}
-                className={selected === index ? 'active' : ''}>
-                {name}
+                key={index}
+                onClick={() => onClickListItem(obj)}
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                {obj.name}
               </li>
             ))}
           </ul>
