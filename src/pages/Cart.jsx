@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Cart = () => {
+export default function Cart() {
   return (
     <div className="container container--cart">
       <div class="cart">
@@ -372,6 +372,4 @@ const Cart = () => {
       </div>
     </div>
   );
-};
-
-export default Cart;
+}
