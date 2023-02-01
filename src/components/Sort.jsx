@@ -2,12 +2,11 @@ import { useState } from 'react';
 
 export default function Sort({ value, onChangeSort }) {
   const list = [
-    { name: 'убыванию популярности', sortProperty: 'rating' },
-    { name: 'возрастанию популярности', sortProperty: '-rating' },
-    { name: 'убыванию цены', sortProperty: 'price' },
-    { name: 'возрастанию цены', sortProperty: '-price' },
-    { name: 'алфавиту Я-А', sortProperty: 'title' },
-    { name: 'алфавиту А-Я', sortProperty: '-title' },
+    { name: 'сначала популярные', sortProperty: 'rating' },
+    { name: 'сначала непопулярные', sortProperty: '-rating' },
+    { name: 'сначала дорогие', sortProperty: 'price' },
+    { name: 'сначала недорогие', sortProperty: '-price' },
+    { name: 'по алфавиту', sortProperty: '-title' },
   ];
 
   const [open, setOpen] = useState(false);
@@ -31,7 +30,7 @@ export default function Sort({ value, onChangeSort }) {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортировка:</b>
         <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (

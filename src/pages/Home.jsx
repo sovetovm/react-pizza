@@ -14,7 +14,7 @@ export default function Home() {
   const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState({
-    name: 'убыванию популярности',
+    name: 'сначала популярные',
     sortProperty: 'rating',
   });
 
