@@ -7,6 +7,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
+import axios from 'axios';
 
 export default function Home() {
   const { categoryId, sortType } = useSelector((state) => state.filter);
@@ -24,12 +25,12 @@ export default function Home() {
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
-      `https://63bd4096d6600623889f0d40.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setPizzas(json);
+    axios
+      .get(
+        `https://63bd4096d6600623889f0d40.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
+      .then((res) => {
+        setPizzas(res.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
