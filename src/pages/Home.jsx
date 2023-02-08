@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -7,7 +8,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
-import axios from 'axios';
 
 export default function Home() {
   const { categoryId, sortType } = useSelector((state) => state.filter);
