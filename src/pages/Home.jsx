@@ -10,12 +10,11 @@ import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 
 export default function Home() {
-  const { categoryId, sortType } = useSelector((state) => state.filter);
+  const { categoryId, sortType, currentPage } = useSelector((state) => state.filter);
 
   const { searchValue } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setIsLoading(true);
@@ -47,7 +46,7 @@ export default function Home() {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : items}</div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination />
     </div>
   );
 }
