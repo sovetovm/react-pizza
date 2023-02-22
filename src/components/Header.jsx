@@ -1,18 +1,24 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
+import { setCurrentPage } from '../redux/slices/filterSlice';
 import Search from './Search';
 
 export default function Header() {
   const { items, totalPrice } = useSelector((state) => state.cart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const { showSearch } = useSelector((state) => state.show);
+
+  const dispatch = useDispatch();
+  const onClickHome = () => {
+    dispatch(setCurrentPage(1));
+  };
   return (
     <div className="header">
       <div className="container">
         <Link to="/">
-          <div className="header__logo">
+          <div onClick={onClickHome} className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>

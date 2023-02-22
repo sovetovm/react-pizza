@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import emptyCart from '../assets/img/empty-cart.png';
 import CartItem from '../components/CartItem';
 import { clearItems } from '../redux/slices/cartSlice';
+import { setCurrentPage } from '../redux/slices/filterSlice';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ export default function Cart() {
     if (window.confirm('Вы уверены, что хотите удалить все пиццы?')) {
       dispatch(clearItems());
     }
+  };
+  const onClickHome = () => {
+    dispatch(setCurrentPage(1));
   };
 
   return totalPrice ? (
@@ -97,7 +101,10 @@ export default function Cart() {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link to="/" className="button button--outline button--add go-back-btn">
+            <Link
+              onClick={onClickHome}
+              to="/"
+              className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"
@@ -130,7 +137,7 @@ export default function Cart() {
           Для того, чтобы заказать пиццу, перейдите на главную страницу.
         </p>
         <img src={emptyCart} alt="Empty cart" />
-        <Link to="/" className="button button--black">
+        <Link onClick={onClickHome} to="/" className="button button--black">
           <span>Вернуться на главную</span>
         </Link>
       </div>
