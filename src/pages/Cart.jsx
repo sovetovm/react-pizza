@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,9 +17,9 @@ export default function Cart() {
     }
   };
 
-  const handleClickHome = () => {
-    dispatch(setShowSearch(true));
-  };
+  useEffect(() => {
+    dispatch(setShowSearch(false));
+  }, [dispatch]);
 
   return totalPrice ? (
     <div className="container container--cart">
@@ -102,10 +103,7 @@ export default function Cart() {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link
-              onClick={handleClickHome}
-              to="/"
-              className="button button--outline button--add go-back-btn">
+            <Link to="/" className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"
@@ -138,7 +136,7 @@ export default function Cart() {
           Для того, чтобы заказать пиццу, перейдите на главную страницу.
         </p>
         <img src={emptyCart} alt="Empty cart" />
-        <Link onClick={handleClickHome} to="/" className="button button--black">
+        <Link to="/" className="button button--black">
           <span>Вернуться на главную</span>
         </Link>
       </div>

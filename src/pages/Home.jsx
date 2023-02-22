@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Categories from '../components/Categories';
@@ -7,6 +7,7 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
+import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
 
 export default function Home() {
   const { categoryId, sortType, currentPage, searchValue } = useSelector((state) => state.filter);
@@ -35,6 +36,12 @@ export default function Home() {
 
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
   const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setShowSearch(true));
+  }, [dispatch]);
 
   return (
     <div className="container">

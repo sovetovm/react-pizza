@@ -1,28 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
-import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
 import Search from './Search';
 
 export default function Header() {
-  const dispatch = useDispatch();
   const { items, totalPrice } = useSelector((state) => state.cart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
-
   const { showSearch } = useSelector((state) => state.show);
-  const handleClickCart = () => {
-    dispatch(setShowSearch(false));
-  };
-  const handleClickHome = () => {
-    dispatch(setShowSearch(true));
-  };
-
   return (
     <div className="header">
       <div className="container">
         <Link to="/">
-          <div onClick={handleClickHome} className="header__logo">
+          <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
@@ -31,7 +21,7 @@ export default function Header() {
           </div>
         </Link>
         {showSearch ? <Search /> : null}
-        <div onClick={handleClickCart} className="header__cart">
+        <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
