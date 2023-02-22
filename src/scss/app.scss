@@ -330,16 +330,17 @@ body {
 
   &--empty {
     margin: 0 auto;
-    width: 560px;
+    width: 700px;
     text-align: center;
 
     h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 20px;
     }
 
     p {
-      font-size: 18px;
+      font-size: 22px;
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
@@ -358,7 +359,7 @@ body {
 
     .button--black {
       padding: 12px 0 14px;
-      width: 230px;
+      width: 300px;
       margin: 0 auto;
       font-weight: 600;
       font-size: 18px;
