@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import emptyCart from '../assets/img/empty-cart.png';
 import CartItem from '../components/CartItem';
 import { clearItems } from '../redux/slices/cartSlice';
-import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -16,10 +14,6 @@ export default function Cart() {
       dispatch(clearItems());
     }
   };
-
-  useEffect(() => {
-    dispatch(setShowSearch(false));
-  }, [dispatch]);
 
   return totalPrice ? (
     <div className="container container--cart">

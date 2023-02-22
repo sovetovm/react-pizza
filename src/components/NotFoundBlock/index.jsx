@@ -1,14 +1,6 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { setShowSearch } from '../../redux/slices/hiddenSearchSlice';
 import styles from './NotFoundBlock.module.scss';
 
 export default function NotFoundBlock() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setShowSearch(false));
-  }, [dispatch]);
   return (
     <div className={styles.root}>
       <h1>

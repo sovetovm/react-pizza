@@ -41,6 +41,9 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(setShowSearch(true));
+    return () => {
+      dispatch(setShowSearch(false));
+    };
   }, [dispatch]);
 
   return (
