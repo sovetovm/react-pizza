@@ -16,10 +16,8 @@ export default function Cart() {
     }
   };
 
-  const { showSearch } = useSelector((state) => state.show);
   const handleClickHome = () => {
     dispatch(setShowSearch(true));
-    console.log(showSearch, 'click on home');
   };
 
   return totalPrice ? (
