@@ -8,6 +8,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
+import { useCallback } from 'react';
 
 export default function Home() {
   const { categoryId, sortType, currentPage, searchValue } = useSelector((state) => state.filter);
@@ -15,7 +16,7 @@ export default function Home() {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const getPizzas = useCallback(async () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -23,16 +24,23 @@ export default function Home() {
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
+    try {
+      const res = await axios.get(
         `https://63bd4096d6600623889f0d40.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`,
-      )
-      .then((res) => {
-        setPizzas(res.data);
-        setIsLoading(false);
-      });
-    window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+      );
+      setPizzas(res.data);
+      window.scrollTo(0, 0);
+    } catch (error) {
+      alert('ОШИБКА ПРИ ЗАГРУЗКЕ ПИЦЦ');
+      console.log('error', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [categoryId, currentPage, sortType, searchValue]);
+
+  useEffect(() => {
+    getPizzas();
+  }, [categoryId, sortType, searchValue, currentPage, getPizzas]);
 
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
   const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
