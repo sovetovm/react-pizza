@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -8,7 +8,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
-import { useCallback } from 'react';
 
 export default function Home() {
   const { categoryId, sortType, currentPage, searchValue } = useSelector((state) => state.filter);
