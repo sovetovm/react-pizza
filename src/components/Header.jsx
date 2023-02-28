@@ -9,6 +9,7 @@ export default function Header() {
   const { items, totalPrice } = useSelector((state) => state.cart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const { showSearch } = useSelector((state) => state.show);
+  const { status } = useSelector((state) => state.pizza);
 
   const dispatch = useDispatch();
   const onClickHome = () => {
@@ -26,7 +27,7 @@ export default function Header() {
             </div>
           </div>
         </Link>
-        {showSearch ? <Search /> : null}
+        {showSearch && status !== 'error' ? <Search /> : null}
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} ₽</span>
