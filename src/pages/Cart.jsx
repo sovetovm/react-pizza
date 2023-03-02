@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import emptyCart from '../assets/img/empty-cart.png';
 import CartItem from '../components/CartItem';
-import { clearItems } from '../redux/slices/cartSlice';
+import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import { setCurrentPage } from '../redux/slices/filterSlice';
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector(selectCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const onClickClear = () => {
     if (window.confirm('Вы уверены, что хотите удалить все пиццы?')) {

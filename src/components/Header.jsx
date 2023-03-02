@@ -2,14 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
+import { selectCart } from '../redux/slices/cartSlice';
 import { setCurrentPage } from '../redux/slices/filterSlice';
+import { selectPizzaData } from '../redux/slices/pizzaSlice';
 import Search from './Search';
 
 export default function Header() {
-  const { items, totalPrice } = useSelector((state) => state.cart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const { items, totalPrice } = useSelector(selectCart);
+  const { status } = useSelector(selectPizzaData);
   const { showSearch } = useSelector((state) => state.show);
-  const { status } = useSelector((state) => state.pizza);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   const dispatch = useDispatch();
   const onClickHome = () => {

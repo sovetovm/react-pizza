@@ -8,11 +8,12 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import ErrorPage from '../components/ErrorPage';
 import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
+import { selectFilter } from '../redux/slices/filterSlice';
 
 export default function Home() {
-  const { categoryId, sortType, currentPage, searchValue } = useSelector((state) => state.filter);
-  const { pizzas, status } = useSelector((state) => state.pizza);
+  const { categoryId, sortType, currentPage, searchValue } = useSelector(selectFilter);
+  const { pizzas, status } = useSelector(selectPizzaData);
   const dispatch = useDispatch();
 
   const getPizzas = useCallback(async () => {
