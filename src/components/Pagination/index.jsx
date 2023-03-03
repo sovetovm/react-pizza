@@ -15,7 +15,7 @@ export default function Pagination() {
       previousLabel="<"
       onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={8}
-      pageCount={2}
+      pageCount={3}
       renderOnZeroPageCount={null}
     />
   );

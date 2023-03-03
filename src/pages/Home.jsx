@@ -7,7 +7,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import ErrorPage from '../components/ErrorPage';
-import { setShowSearch } from '../redux/slices/hiddenSearchSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { selectFilter } from '../redux/slices/filterSlice';
 
@@ -29,13 +28,6 @@ export default function Home() {
   useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, searchValue, currentPage, getPizzas]);
-
-  useEffect(() => {
-    dispatch(setShowSearch(true));
-    return () => {
-      dispatch(setShowSearch(false));
-    };
-  }, [dispatch]);
 
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
   const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
