@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Categories from '../components/Categories';
@@ -10,27 +10,27 @@ import ErrorPage from '../components/ErrorPage';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { selectFilter } from '../redux/slices/filterSlice';
 
-export default function Home() {
+const Home: React.FC = () => {
   const { categoryId, sortType, currentPage, searchValue } = useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzaData);
   const dispatch = useDispatch();
 
-  const getPizzas = useCallback(async () => {
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const sortBy = sortType.sortProperty.replace('-', '');
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
-    const search = searchValue ? `&search=${searchValue}` : '';
-
+  const getPizzas = React.useCallback(async () => {
+    const category: string = categoryId > 0 ? `category=${categoryId}` : '';
+    const sortBy: string = sortType.sortProperty.replace('-', '');
+    const order: string = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    const search: string = searchValue ? `&search=${searchValue}` : '';
+    // @ts-ignore
     dispatch(fetchPizzas({ category, sortBy, order, search, currentPage }));
     window.scrollTo(0, 0);
   }, [categoryId, currentPage, sortType, searchValue, dispatch]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, searchValue, currentPage, getPizzas]);
 
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
-  const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const items = pizzas.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">
@@ -47,4 +47,6 @@ export default function Home() {
       {status === 'error' ? null : <Pagination />}
     </div>
   );
-}
+};
+
+export default Home;

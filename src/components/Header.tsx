@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -7,10 +8,10 @@ import { setCurrentPage } from '../redux/slices/filterSlice';
 import { selectPizzaData } from '../redux/slices/pizzaSlice';
 import Search from './Search';
 
-export default function Header() {
+const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const { status } = useSelector(selectPizzaData);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -71,4 +72,5 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
+export default Header;
