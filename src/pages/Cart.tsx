@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import emptyCart from '../assets/img/empty-cart.png';
 import CartItem from '../components/CartItem';
-import { clearItems, selectCart } from '../redux/slices/cartSlice';
+import { tCartItem, clearItems, selectCart } from '../redux/slices/cartSlice';
 import { setCurrentPage } from '../redux/slices/filterSlice';
+import { useAppDispatch } from '../redux/store';
 
 const Cart: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: tCartItem) => sum + item.count, 0);
   const onClickClear = () => {
     if (window.confirm('Вы уверены, что хотите удалить все пиццы?')) {
       dispatch(clearItems());
@@ -88,7 +89,7 @@ const Cart: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item: any) => (
+          {items.map((item: tCartItem) => (
             <CartItem key={item.id + item.size + item.type + item.index} {...item} />
           ))}
         </div>

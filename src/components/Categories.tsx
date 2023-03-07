@@ -1,11 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 import { selectFilter, setCategoryId } from '../redux/slices/filterSlice';
+import { useAppDispatch } from '../redux/store';
 
 const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
 
 const Categories: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { categoryId } = useSelector(selectFilter);
 
   const onClickCategory = (index: number) => {

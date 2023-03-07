@@ -8,7 +8,7 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import FullPizza from './pages/FullPizza';
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <div className="wrapper">
       <Header />
@@ -22,4 +22,6 @@ export default function App() {
       </div>
     </div>
   );
-}
+};
+
+export default App;
