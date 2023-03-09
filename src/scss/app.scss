@@ -104,6 +104,51 @@ body {
   }
 }
 
+.pizza-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+
+  .pizza-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 75%;
+  }
+
+  .pizza-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+  }
+
+  .pizza-btn {
+    margin-top: auto;
+
+    a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #fe5f1e;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 30px;
+
+      &:hover {
+        background-color: darken($orange, 8%);
+      }
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
 .container {
   width: $container-width;
   margin: 0 auto;
