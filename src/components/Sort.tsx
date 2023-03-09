@@ -12,16 +12,19 @@ const list: tSort[] = [
   { name: 'по алфавиту', sortProperty: '-title' },
 ];
 
-export default function Sort() {
+const Sort: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
   const { sortType } = useSelector(selectFilter);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
 
-  const onClickListItem = (obj: tSort) => {
-    dispatch(setSortType(obj));
-    setOpen(false);
-  };
+  const onClickListItem = React.useCallback(
+    (obj: tSort) => {
+      dispatch(setSortType(obj));
+      setOpen(false);
+    },
+    [dispatch],
+  );
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -34,7 +37,6 @@ export default function Sort() {
       document.body.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
@@ -68,4 +70,6 @@ export default function Sort() {
       )}
     </div>
   );
-}
+});
+
+export default Sort;

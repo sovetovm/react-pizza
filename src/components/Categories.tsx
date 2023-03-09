@@ -6,13 +6,16 @@ import { useAppDispatch } from '../redux/store';
 
 const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
 
-const Categories: React.FC = () => {
+const Categories: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
   const { categoryId } = useSelector(selectFilter);
 
-  const onClickCategory = (index: number) => {
-    dispatch(setCategoryId(index));
-  };
+  const onClickCategory = React.useCallback(
+    (index: number) => {
+      dispatch(setCategoryId(index));
+    },
+    [dispatch],
+  );
 
   return (
     <div className="categories">
@@ -28,5 +31,5 @@ const Categories: React.FC = () => {
       </ul>
     </div>
   );
-};
+});
 export default Categories;
