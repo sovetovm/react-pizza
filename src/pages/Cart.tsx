@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 
 import emptyCart from '../assets/img/empty-cart.png';
 import CartItem from '../components/CartItem';
-import { tCartItem, clearItems, selectCart } from '../redux/slices/cartSlice';
+import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import { setCurrentPage } from '../redux/slices/filterSlice';
 import { useAppDispatch } from '../redux/store';
+import { tCartItem } from '../redux/slices/types';
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();

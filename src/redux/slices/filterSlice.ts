@@ -1,16 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-export type tSort = {
-  name: string;
-  sortProperty: 'rating' | '-rating' | 'price' | '-price' | '-title';
-};
-interface iFilterSliceState {
-  categoryId: number;
-  sortType: tSort;
-  currentPage: number;
-  searchValue: string;
-}
+import { iFilterSliceState, tSort } from './types';
 
 const initialState: iFilterSliceState = {
   categoryId: 0,

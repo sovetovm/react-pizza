@@ -6,19 +6,30 @@ import logoSvg from '../assets/img/pizza-logo.svg';
 import { selectCart } from '../redux/slices/cartSlice';
 import { setCurrentPage } from '../redux/slices/filterSlice';
 import { selectPizzaData } from '../redux/slices/pizzaSlice';
+import { tCartItem } from '../redux/slices/types';
 import { useAppDispatch } from '../redux/store';
 import Search from './Search';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const { status } = useSelector(selectPizzaData);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: tCartItem) => sum + item.count, 0);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const isMounted = React.useRef(false);
 
   const onClickHome = () => {
     dispatch(setCurrentPage(1));
   };
+
+  //ХРАНЕНИЕ ДАННЫХ КОРЗИНЫ В LOCALSTORAGE
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">

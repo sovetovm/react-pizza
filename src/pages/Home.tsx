@@ -7,9 +7,10 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import ErrorPage from '../components/ErrorPage';
-import { fetchPizzas, selectPizzaData, tPizza } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { selectFilter } from '../redux/slices/filterSlice';
 import { useAppDispatch } from '../redux/store';
+import { tPizza } from '../redux/slices/types';
 
 const Home: React.FC = () => {
   const { categoryId, sortType, currentPage, searchValue } = useSelector(selectFilter);

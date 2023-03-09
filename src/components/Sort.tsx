@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '../redux/store';
-import { selectFilter, setSortType, tSort } from '../redux/slices/filterSlice';
+import { selectFilter, setSortType } from '../redux/slices/filterSlice';
+import { tSort } from '../redux/slices/types';
 
 const list: tSort[] = [
   { name: 'сначала популярные', sortProperty: 'rating' },

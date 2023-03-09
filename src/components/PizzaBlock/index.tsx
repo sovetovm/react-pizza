@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem, tCartItem, selectCartItems } from '../../redux/slices/cartSlice';
+import { addItem, selectCartItems } from '../../redux/slices/cartSlice';
+import { tCartItem, tPizza } from '../../redux/slices/types';
 import { useAppDispatch } from '../../redux/store';
-import { tPizza } from '../../redux/slices/pizzaSlice';
 
 const typeNames = ['тонкое', 'традиционное'];
 
