@@ -71,15 +71,6 @@ const cartSlice = createSlice({
       if (findItem) {
         findItem.count--;
       }
-
-      if (findItem?.count === 0) {
-        state.items = state.items.filter(
-          (obj) =>
-            obj.id !== action.payload.id ||
-            obj.size !== action.payload.size ||
-            obj.type !== action.payload.type,
-        );
-      }
       priceCalc(state);
     },
     clearItems(state: iCartSliceState) {
