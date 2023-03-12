@@ -14,33 +14,14 @@ const App: React.FC = () => {
     <div className="wrapper">
       <Header />
       <div className="content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/cart"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Cart />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/pizza/:id"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <FullPizza />
-              </Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <NotFound />
-              </Suspense>
-            }
-          />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/pizza/:id" element={<FullPizza />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </div>
     </div>
   );
